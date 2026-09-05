@@ -5,11 +5,11 @@
 define view entity YI_PUR_ORD_ITEM_A 
  as select from zpur_ord_itm_a
   association to parent YI_PUR_ORD_HD_A as _Header 
-             on $projection.PoUuid = _Header.PoUuid
+             on $projection.PoItemUuid = _Header.PoUuid
             and $projection.PoId = _Header.PoId
   {
-  key po_uuid           as PoUuid,
-  key po_item           as PoItem,
+  key po_item_uuid      as PoItemUuid,
+  key po_Item           as PoItem,
       po_id              as PoId,
       material          as Material,
       @Semantics.quantity.unitOfMeasure: 'UnitOfMeasure'

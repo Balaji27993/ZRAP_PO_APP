@@ -2,7 +2,7 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'PO header interfaceview'
 @Metadata.ignorePropagatedAnnotations: true
-define view entity YI_PUR_ORD_HD_A 
+define root view entity YI_PUR_ORD_HD_A 
 as select from zpur_ord_hdr_a
  composition[0..*] of YI_PUR_ORD_ITEM_A as _Item
 {
