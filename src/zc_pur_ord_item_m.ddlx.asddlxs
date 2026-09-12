@@ -1,0 +1,115 @@
+@Metadata.layer: #CORE
+@UI:{ headerInfo:{ typeName: 'Po Item',
+                   typeNamePlural: 'Po Items',
+                    title: { type: #STANDARD, value: 'PoId'},
+                    description:{ type: #STANDARD, value: 'PoItem' }
+                    },
+              presentationVariant: [{ sortOrder: [{ by: 'PoId', direction: #ASC }]
+                    }]
+                    }
+annotate entity YC_PUR_ORD_ITEM_A with
+{
+  //================================================//
+  //      stucture layout Facet
+
+  //-----Header Facet:Place po Staus
+  @UI.facet: [
+               {
+              id: 'ItemStaus',
+              purpose: #HEADER,
+              position: 10,
+              type:  #DATAPOINT_REFERENCE,
+              targetQualifier: 'ItemStatusqualifier'
+                },
+         //------Main Body item sections
+              {
+               id: 'ItemGeneralSectionTab',
+               type : #COLLECTION,
+               label: 'Item OverView',
+               position: 10
+              },
+        //------Group Column1 : General Info Fileds Block
+              {
+              id: 'ItemInfoGroup',
+              type: #FIELDGROUP_REFERENCE,
+              purpose: #STANDARD,
+              parentId: 'ItemGeneralSectionTab',
+              targetQualifier: 'ItemDetailsGroupQualifier',
+              label: 'General Details',
+              position:  10
+                },
+       //------Group Column2 : Amount and status Fileds Block
+             {
+              id: 'ItemAmountGroup',
+              type: #FIELDGROUP_REFERENCE,
+              purpose: #STANDARD,
+              parentId: 'ItemGeneralSectionTab',
+              targetQualifier: 'ItemAmountGroupQualifier',
+              label: 'Pricing and status',
+              position: 20
+                },
+       //------Group Column3 : Administraction Fileds Block
+                {
+              id: 'ItemAdminGroup',
+              type: #FIELDGROUP_REFERENCE,
+              purpose: #STANDARD,
+              parentId: 'ItemGeneralSectionTab',
+              targetQualifier: 'ItemAdminGroupQualifier',
+              label: 'Admin Section ',
+              position: 30
+                }
+            ]
+
+  //===============================================================================//
+
+       //============Fileds==============//
+  @UI: {
+      lineItem: [{ position: 10 , label: 'Po Item UUID', importance: #HIGH }],
+      fieldGroup: [{label: 'Po Item UUID', qualifier: 'ItemDetailsGroupQualifier', position: 10  }]
+       }
+  PoItemUuid;
+  @UI: {
+        lineItem: [{ position: 20 , label: 'Po Item', importance: #HIGH }],
+        fieldGroup: [{label: 'Po Item', qualifier: 'ItemDetailsGroupQualifier', position: 20  }]
+         }
+  PoItem;
+  @UI: {
+       // lineItem: [{ position: 10 , label: 'Po Item UUID', importance: #HIGH }],
+        fieldGroup: [{label: 'Po Id', qualifier: 'ItemDetailsGroupQualifier', position: 30  }]
+         }
+  PoId;
+  @UI: {
+        lineItem: [{ position: 30 , label: 'Material', importance: #HIGH }],
+        fieldGroup: [{label: 'Material Number', qualifier: 'ItemDetailsGroupQualifier', position: 40  }]
+         }
+  Material;
+  @UI:{
+    lineItem: [{ position: 40 , label: 'Quantity', importance: #HIGH }],
+   fieldGroup: [{label: 'Quentity', qualifier: 'ItemAmountGroupQualifier', position: 10  }]
+   }
+  Quantity;
+  //UnitOfMeasure;
+  @UI:{
+    lineItem: [{ position: 50 , label: 'Line Amount', importance: #HIGH }],
+   fieldGroup: [{label: 'Line Amount', qualifier: 'ItemAmountGroupQualifier', position: 20  }]
+   }
+  LineAmount;
+  //CurrencyCode;
+  @UI:{
+    lineItem: [{ position: 60 , label: 'Status', importance: #HIGH }],
+   fieldGroup: [{label: 'Item Status', qualifier: 'ItemAmountGroupQualifier', position: 30  }]
+   }
+  ItemStatus;
+  @UI:{
+    lineItem: [{ position: 70 , label: 'Line Free Change', importance: #HIGH }],
+   fieldGroup: [{label: 'Quentity', qualifier: 'ItemAmountGroupQualifier', position: 40  }]
+   }
+  LineFreeChange;
+  @UI:{
+   lineItem: [{ position: 80 , importance: #LOW, label: 'Last Change'  }],
+   fieldGroup: [{ qualifier: 'ItemAdminGroupQualifier', position: 10 , label: 'Last Change'}]
+   }
+  LocalLastChnage;
+  ///* Associations */
+  //_Header;
+}

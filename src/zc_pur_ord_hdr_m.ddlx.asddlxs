@@ -1,0 +1,146 @@
+@Metadata.layer: #CORE
+@UI:{
+      headerInfo:{
+                   typeName: 'Purchase Order',
+                   typeNamePlural: 'Purchase Orders' },
+       presentationVariant: [{ sortOrder: [{ by: 'PoId', direction: #ASC }]
+                               }]
+     }
+annotate entity YC_PUR_ORD_HDR_A with
+{
+  //================================================//
+  //      stucture layout Facet
+
+  //-----Header Facet:Place po number in a side-by-side
+  @UI.facet: [
+            {
+            id: 'HeaderPoId',
+            purpose: #HEADER,
+            type: #DATAPOINT_REFERENCE,
+            targetQualifier: 'PoIdDataPoint',
+            position: 10
+             },
+  //-----Header Facet:Place Supplier in a side-by-side
+             {
+            id: 'HeaderSupplier',
+            purpose: #HEADER,
+            type: #DATAPOINT_REFERENCE,
+            targetQualifier: 'SupplierDataPoint',
+            position: 20
+             },
+  //------header Facet: Status display...
+             {
+            id: 'HeaderStatus',
+            purpose: #HEADER,
+            type: #DATAPOINT_REFERENCE,
+            targetQualifier: 'StatusDataPoint',
+            position: 30
+             },
+  //------Main Body sections
+             {
+             id: 'GeneralSectionTab',
+             type: #COLLECTION,
+             label: 'General Secion',
+             position: 10
+              },
+   //------Group Column1 : General Info Fileds Block
+            {
+            id: 'GeneralGroupInfo',
+            purpose: #STANDARD,
+            type: #FIELDGROUP_REFERENCE,
+            label: 'General Info',
+            parentId: 'GeneralSectionTab',
+            targetQualifier: 'GeneralGroupQualifier',
+            position: 10
+            },
+   //------Group Column2 : Amount and status Fileds Block
+            {
+            id: 'amountGrpInfo',
+            purpose: #STANDARD,
+            type: #FIELDGROUP_REFERENCE,
+            label: 'Amount group info',
+            parentId: 'GeneralSectionTab',
+            targetQualifier: 'amountGroupQualifier',
+            position: 20
+             },
+   //------Group Column1 : Administraction Fileds Block
+             {
+            id: 'adminGrpInfo',
+            purpose: #STANDARD,
+            type: #FIELDGROUP_REFERENCE,
+            label: 'Admin group info',
+            parentId: 'GeneralSectionTab',
+            targetQualifier: 'adminGroupQualifier',
+            position: 30
+             },
+   // Bottom Section layout area: Expose your sub-item child table
+            {
+             id: 'itemTabSection',
+            purpose: #STANDARD,
+            type: #LINEITEM_REFERENCE,
+            label: 'Po Items',
+           targetElement: '_Item',
+            position: 20
+             }
+         ]
+
+  //Fileds....
+
+  @UI: {  lineItem: [{ position: 10, label: 'PO UUID', importance:  #HIGH }],
+          fieldGroup: [{ position: 10, label: 'Po UUID', qualifier: 'GeneralGroupQualifier'  }] }
+  PoUuid;
+  @UI: {  lineItem: [{ position: 30, label: 'PO UUID', importance:  #HIGH  }],
+          fieldGroup: [{ position: 30, label: 'PoId', qualifier: 'GeneralGroupQualifier' }],
+          selectionField: [{ position: 10 }] }
+  PoId;
+  @UI: {  lineItem: [{ position:40, label: 'Supplier Id', importance:  #HIGH  }],
+       fieldGroup: [{ position: 40, label: 'Supplier Id', qualifier: 'GeneralGroupQualifier' }],
+       selectionField: [{ position: 10 }] }
+  Supplier;
+  @UI: {  lineItem: [{ position: 50, label: 'Vendor', importance:  #HIGH  }],
+       fieldGroup: [{ position: 50, label: 'Vendor', qualifier: 'GeneralGroupQualifier' }],
+       selectionField: [{ position: 10 }] }
+  Vendor;
+  @UI: {  lineItem: [{ position: 60, label: 'Total Amount', importance:  #HIGH  }],
+       fieldGroup: [{ position: 10, label: 'Total Amount', qualifier: 'amountGroupQualifier' }]
+        }
+  TotalAmount;
+  //   // CurrencyCode;
+  @UI: {  lineItem: [{ position: 70, label: 'Header Status', importance:  #HIGH  }],
+    fieldGroup: [{ position: 20, label: 'Header Status', qualifier: 'amountGroupQualifier' }]
+     }
+  OverallStatus;
+  @UI: {  lineItem: [{ position: 80, label: 'Po Active', importance:  #HIGH  }],
+       fieldGroup: [{ position: 30, label: 'Po Active', qualifier: 'amountGroupQualifier' }]
+        }
+  PoActive;
+  @UI: {  lineItem: [{ position: 90, label: 'Po Org', importance:  #HIGH  }],
+       fieldGroup: [{ position: 40, label: 'Po Org', qualifier: 'amountGroupQualifier' }]
+        }
+  PoOrg;
+  @UI:{
+  lineItem: [{ position: 100,importance: #LOW, label: 'Created By' }],
+  fieldGroup: [{ qualifier: 'AdminGroupQualifier', position: 10, label: 'Created By' }]
+  }
+  CreatedBy;
+  @UI:{
+  lineItem: [{ position: 110,importance: #LOW, label: 'Created At' }],
+  fieldGroup: [{ qualifier: 'AdminGroupQualifier', position: 20, label: 'Created At' }]
+  }
+  CreatedAt;
+  @UI:{
+  lineItem: [{ position: 120,importance: #LOW, label: 'Last Chnage By' }],
+  fieldGroup: [{ qualifier: 'AdminGroupQualifier', position: 30, label: 'Last Chnage By' }]
+  }
+  LastChangedBy;
+  @UI:{
+  lineItem: [{ position: 130,importance: #LOW, label: 'Last Chnage At' }],
+  fieldGroup: [{ qualifier: 'AdminGroupQualifier', position: 40, label: 'Last Change At' }]
+  }
+  LastChangedAt;
+  @UI:{ hidden: true }
+  LocalLastChanged;
+  //    /* Associations */
+  //    _Item;
+
+}

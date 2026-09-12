@@ -1,12 +1,13 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'PO header Projection View'
 @Metadata.ignorePropagatedAnnotations: true
+@Metadata.allowExtensions: true
 define root view entity YC_PUR_ORD_HDR_A 
 provider contract transactional_query as
  projection on YI_PUR_ORD_HD_A
 {
-     key PoId,
-     key PoUuid,
+  key PoUuid,
+      PoId,
       Supplier,
       Vendor,
       @Semantics.amount.currencyCode: 'CurrencyCode'
@@ -21,5 +22,5 @@ provider contract transactional_query as
       LastChangedAt,
       LocalLastChanged,
       /* Associations */
-      _item : redirected to composition child YC_PUR_ORD_ITEM_A
+      _Item : redirected to composition child YC_PUR_ORD_ITEM_A
 }

@@ -6,9 +6,9 @@ define root view entity YI_PUR_ORD_HD_A
 as select from zpur_ord_hdr_a
  composition[0..*] of YI_PUR_ORD_ITEM_A as _Item
 {
-  key po_id              as PoId,
-  key po_uuid            as PoUuid,
-      supplier           as Supplier,
+ key po_uuid            as PoUuid,
+   po_id              as PoId,
+       supplier           as Supplier,
       vendor             as Vendor,
       @Semantics.amount.currencyCode: 'CurrencyCode'
       total_amount       as TotalAmount,

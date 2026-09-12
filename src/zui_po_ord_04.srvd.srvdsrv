@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service definition for PO Ord'
+define service ZUI_PO_ORD_04 {
+  expose YC_PUR_ORD_HDR_A;
+  expose YC_PUR_ORD_ITEM_A;
+}

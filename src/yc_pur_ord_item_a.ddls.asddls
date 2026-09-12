@@ -1,14 +1,15 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'PO Item Projection view'
 @Metadata.ignorePropagatedAnnotations: true
+@Metadata.allowExtensions: true
 define view entity YC_PUR_ORD_ITEM_A as projection on YI_PUR_ORD_ITEM_A
 {
   key PoItemUuid,
-  key PoItem,
+      PoItem,
       PoId,
       Material,
       @Semantics.quantity.unitOfMeasure: 'UnitOfMeasure'
-      Quentity,
+      Quantity,
       UnitOfMeasure,
       @Semantics.amount.currencyCode: 'CurrencyCode'
       LineAmount,

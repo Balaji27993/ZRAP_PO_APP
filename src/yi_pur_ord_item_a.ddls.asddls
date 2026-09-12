@@ -6,14 +6,13 @@ define view entity YI_PUR_ORD_ITEM_A
  as select from zpur_ord_itm_a
   association to parent YI_PUR_ORD_HD_A as _Header 
              on $projection.PoItemUuid = _Header.PoUuid
-            and $projection.PoId = _Header.PoId
   {
   key po_item_uuid      as PoItemUuid,
-  key po_Item           as PoItem,
+      po_Item           as PoItem,
       po_id              as PoId,
       material          as Material,
       @Semantics.quantity.unitOfMeasure: 'UnitOfMeasure'
-      quentity          as Quentity,
+      quantity          as Quantity,
       unit_of_measure   as UnitOfMeasure,
       @Semantics.amount.currencyCode: 'CurrencyCode'
       line_amount       as LineAmount,

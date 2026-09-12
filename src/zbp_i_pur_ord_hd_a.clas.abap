@@ -1,0 +1,5 @@
+CLASS zbp_i_pur_ord_hd_a DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF yi_pur_ord_hd_a.
+ENDCLASS.
+
+CLASS zbp_i_pur_ord_hd_a IMPLEMENTATION.
+ENDCLASS.

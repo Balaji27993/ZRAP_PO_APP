@@ -1,0 +1,77 @@
+managed implementation in class zbp_i_pur_ord_hd_a unique;
+strict ( 2 );
+with draft;
+define behavior for YI_PUR_ORD_HD_A //alias <alias_name>
+persistent table zpur_ord_hdr_a
+draft table zpur_ord_hdr_a_D
+lock master
+total etag LastChangedAt
+authorization master ( instance )
+etag master LocalLastChanged
+early numbering
+{
+  create ( authorization : global );
+  update;
+  delete;
+  field ( readonly ) PoUuid;
+
+  field ( readonly ) PoId, CreatedBy, CreatedAt, LastChangedAt, LastChangedBy, LocalLastChanged;
+
+  association _Item { create( features : instance ); with draft; }
+
+  //mandatory standard RAP framework actions for draft life cycle management
+draft action Edit;
+draft action Resume;
+draft action Discard;
+draft action Activate optimized;
+draft determine action Prepare;
+
+  mapping for zpur_ord_hdr_a
+{
+
+//View filed = tabel filed
+PoUuid           = po_uuid;
+PoId             = po_id;
+Supplier         = supplier;
+Vendor           = vendor;
+TotalAmount      = total_amount;
+CurrencyCode     = currency_code;
+OverallStatus    = overall_status;
+PoActive         = po_active;
+PoOrg            = po_org;
+CreatedBy        = created_by;
+CreatedAt        = created_at;
+LastChangedBy    = last_changed_by;
+LastChangedAt    = last_changed_at;
+LocalLastChanged = local_last_changed;
+}
+}
+
+define behavior for YI_PUR_ORD_ITEM_A //alias <alias_name>
+persistent table zpur_ord_itm_a
+draft table zpur_ord_itm_a_d
+lock dependent by _Header
+authorization dependent by _Header
+etag master LocalLastChnage
+early numbering
+{
+  update;
+  delete;
+  field ( readonly ) PoItemUuid, PoId, PoItem;
+  association _Header{ with draft; }
+
+ mapping for zpur_ord_itm_a
+{
+PoitemUuid          = po_item_uuid;
+PoId            = po_id;
+PoItem          = po_item;
+Material        = material;
+ItemStatus      = item_status;
+Quantity        = quantity;
+UnitOfMeasure   = unit_of_measure;
+LineAmount      = line_amount;
+CurrencyCode    = currency_code;
+LineFreeChange  = line_free_change;
+LocalLastChnage = local_last_chnage;
+}
+}
